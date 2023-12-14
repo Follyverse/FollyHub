@@ -13,8 +13,10 @@ namespace Follyverse
     public partial class ClientDialog : Form
     {
         public TamesProject project;
-        public string IP { get { return IPBox.Text; } }
-        public string Nickname { get { return nickBox.Text; } }
+        public string IP { get { return IPBox.Text; }set { IPBox.Text = value; } }
+        public string Nickname { get { return NickBox.Text; } set { NickBox.Text = value; } }
+        public string Port1 { get { return MainPort.Text; } set { MainPort.Text = value; } }
+        public string Port2 { get { return NickBox.Text; } set { AltPort.Text = value; } }
         public ClientDialog()
         {
             InitializeComponent();

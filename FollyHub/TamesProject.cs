@@ -150,6 +150,9 @@ namespace Follyverse
         public void RunAsClient(bool web)
         {
             ClientDialog cd = new ClientDialog();
+            cd.IP = server;
+            cd.Port1 = port;
+            cd.Port2 = altPort;
             cd.project = this;
             string args;
             cd.SetLabel(web ? "Leave empty for default server." : "Ask your server host to give you this address.");
@@ -157,7 +160,7 @@ namespace Follyverse
             if (result == DialogResult.OK)
             {
                 string server = cd.IP == "" ? MainForm.DefaultServer : cd.IP;
-                args = "address:" + server + " port:" + port + "," + altPort + " name:" + cd.Nickname;
+                args = "address:" + cd.IP + " port:" + cd.Port1 + "," + cd.Port2 + " name:" + cd.Nickname;
                 cd.Dispose();
                 Run(args);
             }
@@ -180,7 +183,7 @@ namespace Follyverse
                         break;
                     }
 
-                DialogResult dr = MessageBox.Show("Your local IP address is:\r\n" + local + "\r\nTo connect, other users will need this address. Press Yes to copy it to clipboard", "IP Declaration", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show("Your local IP address is:\r\n" + local + "\r\nTo connect, other users will need this address. Press Yes to copy it to clipboard. \r\nYour main and 2nd ports are: "+port+", "+altPort, "IP Declaration", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                     Clipboard.SetText(local);
                 RunAsServer();
